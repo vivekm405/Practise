@@ -1,0 +1,35 @@
+fileurl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FDATA.gov_NGAP.xlsx"
+
+download.file(fileurl, destfile = "./ngap.xlsx")
+
+install.packages("xlsx")
+library(xlsx)
+
+dat <- read.xlsx("./getdata_data_DATA.gov_NGAP.xlsx", sheetIndex = 1,colIndex = 7:15, rowIndex = 18:23, header = TRUE)
+sum(dat$Zip*dat$Ext,na.rm=T)
+
+dat
+
+
+fileUrl = "https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Frestaurants.xml"
+
+download.file(fileUrl, destfile = "./restaurant.xml")
+library(XML)
+doc = xmlTreeParse(file = "./restaurant.xml", useInternalNodes = TRUE)
+rootnode <- xmlRoot(doc)
+xmlName(rootnode)
+
+names(rootnode)
+
+rootnode[[1]][[1]][[2]]
+
+count <- xpathSApply(rootnode, "//zipcode", xmlValue)
+
+str(count)
+
+spec <- subset(count, count == "21231")
+str(spec)
+
+
+
+
